@@ -1,0 +1,50 @@
+1. Create project
+    1.1. Do not exclude to git Cargo.lock file
+
+2. Set Dependency
+    2.1 Command: "Cargo add <package_name>"
+    2.2 Package list:
+        actix-web = "4.3.1"
+        serde = { version = "1.0.152", features = ["derive"] }
+        serde_json = "1.0.93"
+
+
+3. Imported library
+    3.1 Code
+            use actix_web::{get, web, App, HttpServer};
+            use serde::{Deserialize, Serialize};
+            use std::sync::Mutex;
+        3.1.1 "Mutex" is rust standard library that enables locking, protecting resource of across threads
+
+
+4 Make Data struct that would be table
+    4.1 struct AppState{Mutex...}
+    4.2 Make table's columns
+        struct TicketListEntry {
+            id: u32,
+            ticket_code_main: String,
+            ticket_code_sub: String,
+            ticket_subject: String,
+            publishing_date: i64,
+            publishing_text: String,
+            publishing_link: String,
+            publishing_subtext: String,
+            on_progress: bool,
+            completed: bool,
+            completed_date: i64,
+            completed_text: String,
+            completed_link: String,
+            completed_subtext: String,
+        }
+
+5 Routing get root
+    5.1 #[get(/)]
+    5.2 async fn () -> String {}
+
+5 Main function
+    5.1 #[actix_web::main]
+    5.2 Declare app_data
+        5.2.1 type: Data<AppState>
+        5.2.2 new(AppState{TABLE-NAME: Mutex::new(vec![])
+            5.2.2.1 ! means dynamically-sized type
+    5.3 Make HttpServer

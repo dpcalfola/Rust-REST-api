@@ -1,0 +1,32 @@
+1. What is #[]
+
+    In Rust, #[] is a syntax that is used to define macro attributes. A macro attribute is a type of attribute that can be applied to various constructs in Rust, such as structs, enums, functions, and modules. These attributes provide additional information or metadata about the construct they are applied to, which can be used by macros or other code that works with Rust code.
+
+    A macro attribute is defined using the #[attribute_name] syntax, where attribute_name is the name of the attribute. Some attributes can take additional arguments, which are specified inside the parentheses following the attribute name. For example, #[derive(Serialize, Deserialize)] is a macro attribute that takes the names of the Serialize and Deserialize traits as arguments.
+
+
+
+
+2. What is ::
+
+    In Rust, the double colon :: is a path separator that is used to access items (such as functions, types, and constants) defined in a module or a crate.
+
+    the :: separator is used to separate the item being accessed (such as a function or module) from its parent module or crate. This allows Rust code to be organized into modules and crates, and provides a way to access items that are defined in other parts of the codebase.
+
+
+
+
+
+3.Why there's "!" on Mutex::new(vec![])?
+(in main.rs on main() function)
+
+    * Summary: Make type of Mutex::new(vec![]) to be dynamically-sized type. And it will fix size at compile time.
+
+    The ! symbol in Mutex::new(vec![]) is part of Rust's type system and is used to indicate that the Mutex is protecting a dynamically-sized type, in this case a Vec. The ! symbol is a shorthand for the Sized trait bound, which is normally used to indicate that a type has a fixed size at compile time.
+
+    In Rust, types that have a fixed size at compile time are said to be sized, while types that have a variable size at runtime are said to be unsized. Rust's type system treats these two types of types differently, and requires different syntax to work with them.
+
+    In the case of Mutex::new(vec![]), we're creating a new Mutex instance that protects a Vec of unknown size, since the vector is empty when it's created. The ! symbol is used to indicate that the Vec is unsized, which allows us to use it inside the Mutex.
+
+
+
